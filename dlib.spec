@@ -1,6 +1,6 @@
 Name:		dlib
 Version:	19.4
-Release:	7%{?dist}
+Release:	8%{?dist}
 Summary:	A modern C++ toolkit containing machine learning algorithms
 
 License:	Boost
@@ -17,6 +17,8 @@ BuildRequires:	openblas-devel
 BuildRequires:	sqlite-devel
 BuildRequires:	fftw-devel
 BuildRequires:	boost-devel
+BuildRequires:  boost-python-devel
+BuildRequires:  boost-python3-devel
 BuildRequires:	python2-devel
 BuildRequires:	python3-devel
 
