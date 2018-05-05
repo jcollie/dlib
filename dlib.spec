@@ -1,6 +1,6 @@
 Name:		dlib
-Version:	19.4
-Release:	8%{?dist}
+Version:	19.10
+Release:	0.1%{?dist}
 Summary:	A modern C++ toolkit containing machine learning algorithms
 
 License:	Boost
@@ -17,10 +17,10 @@ BuildRequires:	openblas-devel
 BuildRequires:	sqlite-devel
 BuildRequires:	fftw-devel
 BuildRequires:	boost-devel
-BuildRequires:  boost-python-devel
-BuildRequires:  boost-python3-devel
 BuildRequires:	python2-devel
 BuildRequires:	python3-devel
+BuildRequires:	boost-python-devel
+BuildRequires:	boost-python3-devel
 
 %description
 Dlib is a general purpose cross-platform open source software library written
@@ -90,10 +90,13 @@ pushd build
 %make_build
 
 popd
-
-%define setup_py_extra_opts --no USE_SSE4_INSTRUCTIONS
-%py2_build %{setup_py_extra_opts}
-%py3_build %{setup_py_extra_opts}
+# this is really needed: in the python tools build it's enabled by
+# default and we do not want that. see
+# https://github.com/davisking/dlib/commit/fbd117804758bd9174a27ce471acfe21b8bfc208
+# and https://github.com/davisking/dlib/issues/111
+%define py_setup_args --no USE_SSE4_INSTRUCTIONS
+%py2_build
+%py3_build
 
 
 %install
@@ -105,8 +108,6 @@ rm -f %{buildroot}/%{_docdir}/dlib/LICENSE.txt
 
 %py2_install
 %py3_install
-find %{buildroot}%{python2_sitearch}/dlib/ -type f -name '*.py' -exec sed -i '1s|^#!.*|#!%{__python2}|' {} \;
-find %{buildroot}%{python3_sitearch}/dlib/ -type f -name '*.py' -exec sed -i '1s|^#!.*|#!%{__python3}|' {} \;
 
 find %{buildroot} -name '.*' -exec rm -rf {} +
 
@@ -129,13 +130,13 @@ find %{buildroot} -name '.*' -exec rm -rf {} +
 %files -n python2-%{name}
 %license dlib/LICENSE.txt
 %license python_examples/LICENSE_FOR_EXAMPLE_PROGRAMS.txt
-%{python2_sitearch}/dlib/
+%{python2_sitearch}/dlib.so
 %{python2_sitearch}/dlib-*.egg-info/
 
 %files -n python3-%{name}
 %license dlib/LICENSE.txt
 %license python_examples/LICENSE_FOR_EXAMPLE_PROGRAMS.txt
-%{python3_sitearch}/dlib/
+%{python3_sitearch}/dlib.*.so
 %{python3_sitearch}/dlib-*.egg-info/
 
 %files doc
@@ -149,6 +150,24 @@ find %{buildroot} -name '.*' -exec rm -rf {} +
 
 
 %changelog
+* Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 19.4-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
+
+* Sun Aug 06 2017 Björn Esser <besser82@fedoraproject.org> - 19.4-6
+- Rebuilt for AutoReq cmake-filesystem
+
+* Wed Aug 02 2017 Fedora Release Engineering <releng@fedoraproject.org> - 19.4-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
+
+* Wed Jul 26 2017 Fedora Release Engineering <releng@fedoraproject.org> - 19.4-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
+* Tue Jul 18 2017 Jonathan Wakely <jwakely@redhat.com> - 19.4-3
+- Rebuilt for Boost 1.64
+
+* Sun May 21 2017 Dmitry Mikhirev <mikhirev@gmail.com> 19.4-2
+- Add BR boost-python3-devel (RHBZ #1443250)
+
 * Mon Apr 17 2017 Dmitry Mikhirev <mikhirev@gmail.com> 19.4-1
 - Update to 19.4 (RHBZ #1442868)
 
