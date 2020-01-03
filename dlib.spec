@@ -1,3 +1,5 @@
+%global __urlhelperopts --silent --show-error --fail --globoff --location -o
+
 Name:		dlib
 Version:	19.19
 Release:	0.3%{?dist}
