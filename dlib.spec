@@ -1,6 +1,6 @@
 Name:		dlib
 Version:	19.19
-Release:	0.2%{?dist}
+Release:	0.3%{?dist}
 Summary:	A modern C++ toolkit containing machine learning algorithms
 
 License:	Boost
