@@ -1,6 +1,6 @@
 Name:		dlib
 Version:	19.19
-Release:	0.4%{?dist}
+Release:	0.5%{?dist}
 Summary:	A modern C++ toolkit containing machine learning algorithms
 
 License:	Boost
@@ -78,6 +78,12 @@ pushd build
 %make_build
 
 popd
+# this is really needed: in the python tools build it's enabled by
+# default and we do not want that. see
+# https://github.com/davisking/dlib/commit/fbd117804758bd9174a27ce471acfe21b8bfc208
+# and https://github.com/davisking/dlib/issues/111
+
+%define py_setup_args --no USE_SSE4_INSTRUCTIONS
 %py3_build
 
 
