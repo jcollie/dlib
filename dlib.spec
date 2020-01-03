@@ -1,5 +1,3 @@
-%global __urlhelperopts --silent --show-error --fail --globoff --location -o
-
 Name:		dlib
 Version:	19.19
 Release:	0.3%{?dist}
@@ -7,7 +5,7 @@ Summary:	A modern C++ toolkit containing machine learning algorithms
 
 License:	Boost
 URL:		http://dlib.net
-Source0:	http://dlib.net/files/%{name}-%{version}.tar.bz2
+Source0:    https://github.com/davisking/%{name}/archive/v%{version}.tar.gz
 
 BuildRequires:	gcc-c++
 BuildRequires:	cmake
