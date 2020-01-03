@@ -1,6 +1,6 @@
 Name:		dlib
 Version:	19.19
-Release:	0.5%{?dist}
+Release:	0.6%{?dist}
 Summary:	A modern C++ toolkit containing machine learning algorithms
 
 License:	Boost
@@ -83,7 +83,7 @@ popd
 # https://github.com/davisking/dlib/commit/fbd117804758bd9174a27ce471acfe21b8bfc208
 # and https://github.com/davisking/dlib/issues/111
 
-%define py_setup_args --no USE_SSE4_INSTRUCTIONS
+%define py_setup_args --no USE_SSE4_INSTRUCTIONS --no USE_SSE41_INSTRUCTIONS
 %py3_build
 
 
