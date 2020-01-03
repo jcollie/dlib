@@ -132,12 +132,8 @@ find %{buildroot} -name '.*' -exec rm -rf {} +
 %files doc
 %license examples/LICENSE_FOR_EXAMPLE_PROGRAMS.txt
 %license examples/video_frames/license.txt
-%doc documentation.html
 %doc docs
 %doc examples
-%exclude %{_docdir}/%{name}-doc/docs/python/.doctrees
-%exclude %{_docdir}/%{name}-doc/docs/python/.buildinfo
-
 
 %changelog
 * Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 19.4-7
