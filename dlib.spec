@@ -1,5 +1,5 @@
 Name:		dlib
-Version:	19.10
+Version:	19.19
 Release:	0.1%{?dist}
 Summary:	A modern C++ toolkit containing machine learning algorithms
 
@@ -17,9 +17,7 @@ BuildRequires:	openblas-devel
 BuildRequires:	sqlite-devel
 BuildRequires:	fftw-devel
 BuildRequires:	boost-devel
-BuildRequires:	python2-devel
 BuildRequires:	python3-devel
-BuildRequires:	boost-python-devel
 BuildRequires:	boost-python3-devel
 
 %description
@@ -95,7 +93,6 @@ popd
 # https://github.com/davisking/dlib/commit/fbd117804758bd9174a27ce471acfe21b8bfc208
 # and https://github.com/davisking/dlib/issues/111
 %define py_setup_args --no USE_SSE4_INSTRUCTIONS
-%py2_build
 %py3_build
 
 
@@ -106,7 +103,6 @@ popd
 rm -f %{buildroot}/%{_libdir}/*.a
 rm -f %{buildroot}/%{_docdir}/dlib/LICENSE.txt
 
-%py2_install
 %py3_install
 
 find %{buildroot} -name '.*' -exec rm -rf {} +
@@ -126,12 +122,6 @@ find %{buildroot} -name '.*' -exec rm -rf {} +
 %{_includedir}/dlib/
 %{_libdir}/cmake/dlib/
 %{_libdir}/pkgconfig/*.pc
-
-%files -n python2-%{name}
-%license dlib/LICENSE.txt
-%license python_examples/LICENSE_FOR_EXAMPLE_PROGRAMS.txt
-%{python2_sitearch}/dlib.so
-%{python2_sitearch}/dlib-*.egg-info/
 
 %files -n python3-%{name}
 %license dlib/LICENSE.txt
