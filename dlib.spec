@@ -1,6 +1,6 @@
 Name:		dlib
 Version:	19.19
-Release:	0.3%{?dist}
+Release:	0.4%{?dist}
 Summary:	A modern C++ toolkit containing machine learning algorithms
 
 License:	Boost
@@ -41,21 +41,11 @@ in the C++ programming language. This package contains development files for
 the library.
 
 
-%package -n python2-%{name}
-Summary:	Python 2 interface to %{name}
-License:	Boost and Public Domain
-%{?python_provide:%python_provide python2-%{name}}
-
-%description -n python2-%{name}
-Dlib is a general purpose cross-platform open source software library written
-in the C++ programming language. This package contains Python 2 API for the
-library.
-
-
 %package -n python3-%{name}
 Summary:	Python 3 interface to %{name}
 License:	Boost and Public Domain
 %{?python_provide:%python_provide python3-%{name}}
+Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description -n python3-%{name}
 Dlib is a general purpose cross-platform open source software library written
@@ -88,11 +78,6 @@ pushd build
 %make_build
 
 popd
-# this is really needed: in the python tools build it's enabled by
-# default and we do not want that. see
-# https://github.com/davisking/dlib/commit/fbd117804758bd9174a27ce471acfe21b8bfc208
-# and https://github.com/davisking/dlib/issues/111
-#define py_setup_args --no USE_SSE4_INSTRUCTIONS
 %py3_build
 
 
